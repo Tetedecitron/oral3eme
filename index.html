@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parcours Avenir — Comment fonctionne un site web</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0e0e0e;
+      --surface: #161616;
+      --surface2: #1e1e1e;
+      --border: rgba(255,255,255,0.08);
+      --border2: rgba(255,255,255,0.14);
+      --text: #f0ede8;
+      --muted: #888;
+      --dim: #555;
+      --accent: #c9a84c;
+      --accent-dim: rgba(201,168,76,0.12);
+      --accent-border: rgba(201,168,76,0.3);
+      --white: #fff;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    .page { max-width: 720px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+
+    /* HERO */
+    .hero {
+      border-bottom: 0.5px solid var(--border2);
+      padding-bottom: 3rem;
+      margin-bottom: 3rem;
+    }
+    .hero-tag {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--white);
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-sub {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 540px;
+      line-height: 1.7;
+    }
+    .chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+    .chip {
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 0.5px solid var(--border2);
+      color: var(--muted);
+    }
+
+    /* SECTIONS */
+    .section {
+      margin-bottom: 3.5rem;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+    }
+    .section-num {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+    .section-line {
+      flex: 1;
+      height: 0.5px;
+      background: var(--border);
+    }
+    .section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .section p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+    .section p:last-child { margin-bottom: 0; }
+
+    /* INTRO BLOCK */
+    .intro-text {
+      font-size: 15px;
+      color: #c0bdb7;
+      line-height: 1.8;
+    }
+
+    /* TECH CARDS */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 1.5rem 0;
+    }
+    .tech-card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: 10px;
+      padding: 1.1rem 1rem;
+    }
+    .tech-card .lang {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .tech-card .role {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .tech-card .desc {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* FLOW */
+    .flow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+    }
+    .flow-step {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 14px;
+      border-radius: 6px;
+      border: 0.5px solid var(--accent-border);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+    .flow-arrow { color: var(--dim); font-size: 14px; }
+
+    /* SUBSECTION LABEL */
+    .sub-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    .sub-label:first-of-type { margin-top: 0; }
+
+    /* JOB GRID */
+    .job-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 0.5rem;
+    }
+    .job-card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+    }
+    .job-card .j-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+    .job-card .j-desc {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* SKILL LIST */
+    .skill-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 0.5rem;
+    }
+    .skill-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: #999;
+    }
+    .skill-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ETUDES */
+    .etude-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-top: 0.5rem;
+    }
+    .etude-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: #999;
+    }
+    .etude-badge {
+      font-size: 9px;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: 4px;
+      flex-shrink: 0;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .badge-bac { background: rgba(201,168,76,0.15); color: var(--accent); border: 0.5px solid var(--accent-border); }
+    .badge-sup { background: rgba(255,255,255,0.06); color: #aaa; border: 0.5px solid var(--border2); }
+
+    /* CONCLUSION */
+    .conclusion {
+      background: var(--surface);
+      border: 0.5px solid var(--border2);
+      border-radius: 12px;
+      padding: 2rem;
+      position: relative;
+    }
+    .conclusion::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      border-radius: 12px 12px 0 0;
+      background: var(--accent);
+      opacity: 0.7;
+    }
+    .conclusion p {
+      font-size: 14px;
+      color: #aaa;
+      line-height: 1.8;
+      margin-bottom: 0.85rem;
+    }
+    .conclusion p:last-child { margin-bottom: 0; }
+    .conclusion strong { color: var(--text); font-weight: 500; }
+
+    /* DIVIDER */
+    .divider {
+      height: 0.5px;
+      background: var(--border);
+      margin: 1.5rem 0;
+    }
+
+    /* FOOTER */
+    .footer {
+      border-top: 0.5px solid var(--border);
+      padding-top: 1.5rem;
+      margin-top: 2rem;
+      font-size: 11px;
+      color: var(--dim);
+      text-align: center;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 500px) {
+      .tech-grid { grid-template-columns: 1fr; }
+      .job-grid { grid-template-columns: 1fr; }
+      .page { padding: 2rem 1.25rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">Parcours Avenir &mdash; 3ème</div>
+    <h1>Comment fonctionne<br><em>un site web ?</em></h1>
+    <p class="hero-sub">Des coulisses du numérique aux métiers d'avenir : une exploration des technologies web et des parcours professionnels qu'elles ouvrent.</p>
+    <div class="chips">
+      <span class="chip">HTML &middot; CSS &middot; JavaScript</span>
+      <span class="chip">Développement web</span>
+      <span class="chip">Orientation professionnelle</span>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">Introduction</span>
+      <div class="section-line"></div>
+    </div>
+    <p class="intro-text">
+      Comprendre comment fonctionne un site web, c'est entrer dans les coulisses du numérique — un secteur qui évolue très vite et qui offre de nombreux métiers comme <strong style="color:#c0bdb7;font-weight:500;">programmeur, développeur web</strong> ou <strong style="color:#c0bdb7;font-weight:500;">webmaster</strong>.
+    </p>
+    <div class="divider"></div>
+    <p style="font-size:13px;color:var(--dim);">Plan de la présentation</p>
+    <div class="flow" style="margin-top:0.75rem;">
+      <span class="flow-step">1. Fonctionnement</span>
+      <span class="flow-arrow">&#8594;</span>
+      <span class="flow-step">2. Les métiers</span>
+      <span class="flow-arrow">&#8594;</span>
+      <span class="flow-step">3. Les études</span>
+      <span class="flow-arrow">&#8594;</span>
+      <span class="flow-step">4. Conclusion</span>
+    </div>
+  </div>
+
+  <!-- PARTIE 1 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">Partie 1</span>
+      <div class="section-line"></div>
+    </div>
+    <h2>Comment fonctionne un site web</h2>
+    <p>Un site web repose sur trois éléments principaux qui fonctionnent ensemble pour afficher une page dans votre navigateur.</p>
+
+    <div class="tech-grid">
+      <div class="tech-card">
+        <div class="role">Structure</div>
+        <div class="lang">HTML</div>
+        <div class="desc">L'ossature de la page, comme les murs d'une maison.</div>
+      </div>
+      <div class="tech-card">
+        <div class="role">Apparence</div>
+        <div class="lang">CSS</div>
+        <div class="desc">Les couleurs, la mise en page, les polices.</div>
+      </div>
+      <div class="tech-card">
+        <div class="role">Interactions</div>
+        <div class="lang">JS</div>
+        <div class="desc">Les animations, boutons, menus dynamiques.</div>
+      </div>
+    </div>
+
+    <p>Quand on tape une adresse dans un navigateur, celui-ci envoie une demande à un serveur, qui renvoie les fichiers du site. Le navigateur les lit, assemble le HTML, applique le CSS, exécute le JavaScript — et affiche la page.</p>
+
+    <div class="flow">
+      <span class="flow-step">Navigateur</span>
+      <span class="flow-arrow">&#8594;</span>
+      <span class="flow-step">Requête serveur</span>
+      <span class="flow-arrow">&#8594;</span>
+      <span class="flow-step">Fichiers reçus</span>
+      <span class="flow-arrow">&#8594;</span>
+      <span class="flow-step">Page affichée</span>
+    </div>
+  </div>
+
+  <!-- PARTIE 2 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">Partie 2</span>
+      <div class="section-line"></div>
+    </div>
+    <h2>Les métiers du web</h2>
+
+    <p>Le domaine du web m'attire parce qu'il combine créativité, logique et technologie. On peut créer quelque chose à partir de rien, résoudre des problèmes, et voir immédiatement le résultat.</p>
+
+    <div class="sub-label">Les métiers possibles</div>
+    <div class="job-grid">
+      <div class="job-card">
+        <div class="j-title">Développeur web</div>
+        <div class="j-desc">Écrit le code, crée les fonctionnalités, assure le bon fonctionnement.</div>
+      </div>
+      <div class="job-card">
+        <div class="j-title">Webmaster</div>
+        <div class="j-desc">Gère un site au quotidien, met à jour les pages, corrige les bugs.</div>
+      </div>
+      <div class="job-card">
+        <div class="j-title">Développeur front-end</div>
+        <div class="j-desc">S'occupe de la partie visible, ce que l'utilisateur voit.</div>
+      </div>
+      <div class="job-card">
+        <div class="j-title">Développeur back-end</div>
+        <div class="j-desc">Gère la partie cachée : bases de données, serveurs.</div>
+      </div>
+      <div class="job-card">
+        <div class="j-title">Webdesigner</div>
+        <div class="j-desc">Crée l'apparence du site : couleurs, images, mise en page.</div>
+      </div>
+      <div class="job-card">
+        <div class="j-title">Admin système</div>
+        <div class="j-desc">S'occupe des serveurs et de l'hébergement du site.</div>
+      </div>
+    </div>
+
+    <div class="sub-label">Compétences nécessaires</div>
+    <div class="skill-list">
+      <div class="skill-item"><div class="skill-dot"></div>Savoir coder (HTML, CSS, JavaScript, Python, PHP…)</div>
+      <div class="skill-item"><div class="skill-dot"></div>Avoir de la logique pour résoudre des problèmes</div>
+      <div class="skill-item"><div class="skill-dot"></div>Être créatif pour imaginer des interfaces</div>
+      <div class="skill-item"><div class="skill-dot"></div>Savoir travailler en équipe — les projets se font rarement seul</div>
+      <div class="skill-item"><div class="skill-dot"></div>Être curieux, car les technologies évoluent très vite</div>
+    </div>
+  </div>
+
+  <!-- PARTIE 3 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">Partie 3</span>
+      <div class="section-line"></div>
+    </div>
+    <h2>Études &amp; débouchés</h2>
+
+    <div class="sub-label">Après le collège</div>
+    <div class="etude-list">
+      <div class="etude-item"><span class="etude-badge badge-bac">Bac</span>Général avec spécialité NSI (Numérique et Sciences Informatiques)</div>
+      <div class="etude-item"><span class="etude-badge badge-bac">Bac</span>Technologique STI2D</div>
+      <div class="etude-item"><span class="etude-badge badge-bac">Bac</span>Professionnel SN (Systèmes Numériques)</div>
+    </div>
+
+    <div class="sub-label">Après le bac</div>
+    <div class="etude-list">
+      <div class="etude-item"><span class="etude-badge badge-sup">Sup</span>BUT Informatique</div>
+      <div class="etude-item"><span class="etude-badge badge-sup">Sup</span>BTS SIO (Services Informatiques aux Organisations)</div>
+      <div class="etude-item"><span class="etude-badge badge-sup">Sup</span>Écoles spécialisées en développement web</div>
+      <div class="etude-item"><span class="etude-badge badge-sup">Sup</span>Licence ou master en informatique</div>
+    </div>
+
+    <div class="divider"></div>
+    <p>Le numérique est un secteur qui recrute énormément. On peut travailler en entreprise, en freelance, ou même créer son propre site ou application. L'intelligence artificielle, la réalité virtuelle et la cybersécurité ouvrent encore plus de possibilités pour l'avenir.</p>
+  </div>
+
+  <!-- CONCLUSION -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">Conclusion</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="conclusion">
+      <p>Comprendre comment fonctionne un site web permet de découvrir un univers beaucoup plus vaste : <strong>celui des métiers du numérique</strong>.</p>
+      <p>Ce thème m'a permis de mieux connaître les technologies du web, mais surtout <strong>d'explorer un parcours professionnel qui m'intéresse vraiment</strong>.</p>
+      <p>Les métiers du web sont variés, accessibles, et surtout <strong>tournés vers l'avenir</strong>. C'est un domaine où l'on peut créer, apprendre, et évoluer toute sa vie.</p>
+      <p>C'est pour cela que je m'y intéresse particulièrement dans mon <strong>Parcours Avenir</strong>.</p>
+    </div>
+  </div>
+
+  <div class="footer">Parcours Avenir &mdash; 3ème &mdash; Comment fonctionne un site web</div>
+
+</div>
+</body>
+</html>
