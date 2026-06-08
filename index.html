@@ -3,482 +3,459 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Parcours Avenir — Comment fonctionne un site web</title>
+  <title>Présentation Parcours Avenir — Comment fonctionne un site web</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght=0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=Fira+Code:wght=400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg: #0e0e0e;
-      --surface: #161616;
-      --surface2: #1e1e1e;
-      --border: rgba(255,255,255,0.08);
-      --border2: rgba(255,255,255,0.14);
-      --text: #f0ede8;
-      --muted: #888;
-      --dim: #555;
-      --accent: #c9a84c;
-      --accent-dim: rgba(201,168,76,0.12);
-      --accent-border: rgba(201,168,76,0.3);
-      --white: #fff;
+      --bg: #ffffff;
+      --surface: #ffffff;
+      --surface2: #f8f9fa;
+      --border: #e9ecef;
+      --border2: #dee2e6;
+      --text: #212529;
+      --muted: #495057;
+      --dim: #adb5bd;
+      --accent: #ad861f;
+      --accent-dim: rgba(173, 134, 31, 0.1);
+      --accent-border: rgba(173, 134, 31, 0.4);
+      --white: #000000;
+      --code-bg: #1e1e1e;
+      --code-text: #d4d4d4;
     }
-
     body {
       font-family: 'DM Sans', sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.65;
-    }
-
-    .page { max-width: 720px; margin: 0 auto; padding: 3rem 2rem 5rem; }
-
-    /* HERO */
-    .hero {
-      border-bottom: 0.5px solid var(--border2);
-      padding-bottom: 3rem;
-      margin-bottom: 3rem;
-    }
-    .hero-tag {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.25rem;
-    }
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 700;
-      line-height: 1.15;
-      color: var(--white);
-      margin-bottom: 1.25rem;
-    }
-    .hero h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
-    .hero-sub {
-      font-size: 15px;
-      color: var(--muted);
-      max-width: 540px;
-      line-height: 1.7;
-    }
-    .chips {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 1.5rem;
-    }
-    .chip {
-      font-size: 11px;
-      padding: 4px 12px;
-      border-radius: 20px;
-      border: 0.5px solid var(--border2);
-      color: var(--muted);
-    }
-
-    /* SECTIONS */
-    .section {
-      margin-bottom: 3.5rem;
-    }
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 1.5rem;
-    }
-    .section-num {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 2px;
-      color: var(--accent);
-      text-transform: uppercase;
-    }
-    .section-line {
-      flex: 1;
-      height: 0.5px;
-      background: var(--border);
-    }
-    .section h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      font-weight: 400;
-      color: var(--white);
-      margin-bottom: 1rem;
-    }
-    .section p {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.75;
-      margin-bottom: 1rem;
-    }
-    .section p:last-child { margin-bottom: 0; }
-
-    /* INTRO BLOCK */
-    .intro-text {
-      font-size: 15px;
-      color: #c0bdb7;
-      line-height: 1.8;
-    }
-
-    /* TECH CARDS */
-    .tech-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin: 1.5rem 0;
-    }
-    .tech-card {
-      background: var(--surface);
-      border: 0.5px solid var(--border);
-      border-radius: 10px;
-      padding: 1.1rem 1rem;
-    }
-    .tech-card .lang {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      color: var(--white);
-      margin-bottom: 4px;
-    }
-    .tech-card .role {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 6px;
-    }
-    .tech-card .desc {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    /* FLOW */
-    .flow {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin: 1rem 0;
-    }
-    .flow-step {
-      font-size: 12px;
-      font-weight: 500;
-      padding: 5px 14px;
-      border-radius: 6px;
-      border: 0.5px solid var(--accent-border);
-      color: var(--accent);
-      background: var(--accent-dim);
-    }
-    .flow-arrow { color: var(--dim); font-size: 14px; }
-
-    /* SUBSECTION LABEL */
-    .sub-label {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--dim);
-      margin-bottom: 0.75rem;
-      margin-top: 1.5rem;
-    }
-    .sub-label:first-of-type { margin-top: 0; }
-
-    /* JOB GRID */
-    .job-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-      margin-top: 0.5rem;
-    }
-    .job-card {
-      background: var(--surface);
-      border: 0.5px solid var(--border);
-      border-radius: 8px;
-      padding: 0.85rem 1rem;
-    }
-    .job-card .j-title {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 3px;
-    }
-    .job-card .j-desc {
-      font-size: 11px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    /* SKILL LIST */
-    .skill-list {
+      overflow: hidden;
+      height: 100vh;
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      margin-top: 0.5rem;
-    }
-    .skill-item {
-      display: flex;
+      justify-content: center;
       align-items: center;
-      gap: 10px;
-      font-size: 13px;
-      color: #999;
-    }
-    .skill-dot {
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: var(--accent);
-      flex-shrink: 0;
     }
 
-    /* ETUDES */
-    .etude-list {
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-      margin-top: 0.5rem;
-    }
-    .etude-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 13px;
-      color: #999;
-    }
-    .etude-badge {
-      font-size: 9px;
-      font-weight: 500;
-      padding: 3px 8px;
-      border-radius: 4px;
-      flex-shrink: 0;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-    .badge-bac { background: rgba(201,168,76,0.15); color: var(--accent); border: 0.5px solid var(--accent-border); }
-    .badge-sup { background: rgba(255,255,255,0.06); color: #aaa; border: 0.5px solid var(--border2); }
-
-    /* CONCLUSION */
-    .conclusion {
-      background: var(--surface);
-      border: 0.5px solid var(--border2);
-      border-radius: 12px;
-      padding: 2rem;
+    /* CONTENEUR DES DIAPOS */
+    .slides-container {
       position: relative;
+      width: 95vw;
+      max-width: 1200px;
+      height: 80vh;
+      max-height: 680px;
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 12px;
+      padding: 3.5rem;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.05);
     }
-    .conclusion::before {
-      content: '';
+
+    .slide {
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      border-radius: 12px 12px 0 0;
-      background: var(--accent);
-      opacity: 0.7;
-    }
-    .conclusion p {
-      font-size: 14px;
-      color: #aaa;
-      line-height: 1.8;
-      margin-bottom: 0.85rem;
-    }
-    .conclusion p:last-child { margin-bottom: 0; }
-    .conclusion strong { color: var(--text); font-weight: 500; }
-
-    /* DIVIDER */
-    .divider {
-      height: 0.5px;
-      background: var(--border);
-      margin: 1.5rem 0;
+      top: 3.5rem; left: 3.5rem; right: 3.5rem; bottom: 3.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
-    /* FOOTER */
-    .footer {
-      border-top: 0.5px solid var(--border);
-      padding-top: 1.5rem;
-      margin-top: 2rem;
-      font-size: 11px;
-      color: var(--dim);
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* STRUCTURES DE MISES EN PAGE */
+    .slide-layout {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+      align-items: center;
+      height: 100%;
+    }
+
+    .slide-full {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .slide-center-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
       text-align: center;
-      letter-spacing: 1px;
-      text-transform: uppercase;
     }
 
-    @media (max-width: 500px) {
-      .tech-grid { grid-template-columns: 1fr; }
-      .job-grid { grid-template-columns: 1fr; }
-      .page { padding: 2rem 1.25rem 4rem; }
+    /* TYPOGRAPHIE */
+    .slide-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
     }
+
+    h1, h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--white);
+      line-height: 1.1;
+    }
+
+    h1 { font-size: 3.8rem; margin-bottom: 1.5rem; }
+    h1 em { font-style: italic; color: var(--accent); }
+    h2 { font-size: 2.4rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--accent-dim); padding-bottom: 0.5rem; }
+
+    p { font-size: 1.15rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.2rem; }
+    
+    /* LISTES */
+    ul { list-style: none; }
+    li { 
+      font-size: 1.15rem; 
+      margin-bottom: 1rem; 
+      color: var(--muted); 
+      position: relative;
+      padding-left: 1.5rem;
+      line-height: 1.5;
+      text-align: left;
+    }
+    li::before { 
+      content: "—"; 
+      position: absolute;
+      left: 0;
+      color: var(--accent); 
+      font-weight: bold;
+    }
+    strong { color: var(--white); font-weight: 700; }
+
+    /* CODES VISUELS TECHNIQUES */
+    .code-image-side {
+      font-family: 'Fira Code', monospace;
+      background: var(--code-bg);
+      color: var(--code-text);
+      padding: 25px;
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.6;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+      border-left: 4px solid var(--accent);
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    /* GRILLES */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    
+    .card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    .card-title { font-weight: 700; font-size: 1.1rem; color: var(--white); margin-bottom: 4px; }
+    .card-sub { font-size: 9px; font-weight: 700; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+    .card-desc { font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+    /* CONTENEUR BOUTON PROJET */
+    .project-container {
+      margin-top: 1.5rem;
+      padding: 2.5rem;
+      background: var(--surface2);
+      border-radius: 12px;
+      border: 1px solid var(--border2);
+    }
+    .project-btn {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: #000000;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1.2rem;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .project-btn:hover { background: var(--accent); transform: translateY(-2px); }
+
+    /* NAVIGATION CONTROLES */
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 95vw;
+      max-width: 1200px;
+      margin-top: 1.5rem;
+    }
+    .btn {
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      padding: 0.8rem 1.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); background: #ffffff; }
+    .btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .counter { font-size: 13px; color: var(--dim); font-weight: 700; text-transform: uppercase; }
   </style>
 </head>
 <body>
-<div class="page">
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-tag">Parcours Avenir &mdash; 3ème</div>
-    <h1>Comment fonctionne<br><em>un site web ?</em></h1>
-    <p class="hero-sub">Des coulisses du numérique aux métiers d'avenir : une exploration des technologies web et des parcours professionnels qu'elles ouvrent.</p>
-    <div class="chips">
-      <span class="chip">HTML &middot; CSS &middot; JavaScript</span>
-      <span class="chip">Développement web</span>
-      <span class="chip">Orientation professionnelle</span>
+  <div class="slides-container">
+    
+    <div class="slide active">
+      <div class="slide-center-text">
+        <div class="slide-tag">Soutenance de Stage / Parcours Avenir</div>
+        <h1>Comment fonctionne <br><em>un site web ?</em></h1>
+        <p style="font-size: 1.3rem; max-width: 700px; margin: 0 auto;">Comprendre les coulisses et les technologies de l'internet pour analyser un secteur d'orientation majeur et dynamique.</p>
+      </div>
     </div>
+
+    <div class="slide">
+      <div class="slide-full">
+        <div class="slide-tag">Sommaire</div>
+        <h2>Plan de la présentation</h2>
+        <ul>
+          <li><strong>Partie 1 :</strong> Architecture et fonctionnement technique du Web (HTML, CSS, JavaScript)</li>
+          <li><strong>Partie 2 :</strong> Les métiers clés du secteur, rôles et compétences requises</li>
+          <li><strong>Partie 3 :</strong> Voies d'orientation au lycée et perspectives d'études supérieures</li>
+          <li><strong>Bilan :</strong> Analyse globale de mes recherches et mon projet concret</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-layout">
+        <div>
+          <div class="slide-tag">Partie 1 — Technique</div>
+          <h2>Le code : trois langages indispensables</h2>
+          <div class="grid-3">
+            <div class="card">
+              <div class="card-sub">Structure</div>
+              <div class="card-title">HTML</div>
+              <div class="card-desc">L'ossature brute. Organise les textes, images et conteneurs logiques de la page.</div>
+            </div>
+            <div class="card">
+              <div class="card-sub">Style</div>
+              <div class="card-title">CSS</div>
+              <div class="card-desc">L'esthétique. Configure la charte graphique, les espacements et les couleurs.</div>
+            </div>
+            <div class="card">
+              <div class="card-sub">Logique</div>
+              <div class="card-title">JavaScript</div>
+              <div class="card-desc">Le mouvement. Pilote l'interactivité, le comportement des menus et les calculs.</div>
+            </div>
+          </div>
+        </div>
+        <div class="code-image-side"><span style="color: #569cd6;">&lt;!DOCTYPE html&gt;</span>
+<span style="color: #569cd6;">&lt;html&gt;</span>
+  <span style="color: #569cd6;">&lt;head&gt;</span>
+    <span style="color: #569cd6;">&lt;style&gt;</span>
+      <span style="color: #d7ba7d;">body</span> { <span style="color: #9cdcfe;">color</span>: <span style="color: #ce9178;">#ad861f</span>; }
+    <span style="color: #569cd6;">&lt;/style&gt;</span>
+  <span style="color: #569cd6;">&lt;/head&gt;</span>
+  <span style="color: #569cd6;">&lt;body&gt;</span>
+    <span style="color: #569cd6;">&lt;script&gt;</span><span style="color: #4fc1ff;">console</span>.<span style="color: #dcdcaa;">log</span>(<span style="color: #ce9178;">"Exécution"</span>);<span style="color: #569cd6;">&lt;/script&gt;</span>
+  <span style="color: #569cd6;">&lt;/body&gt;</span>
+<span style="color: #569cd6;">&lt;/html&gt;</span></div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-layout">
+        <div>
+          <div class="slide-tag">Partie 1 — Réseau</div>
+          <h2>Le voyage de la requête</h2>
+          <p>Le web fonctionne sur un système d'échange continu entre deux entités distinctes :</p>
+          <ul>
+            <li><strong>Le Client (Navigateur) :</strong> Émet une requête réseau cryptée en HTTP/HTTPS lorsque l'on saisit une adresse URL.</li>
+            <li><strong>Le Serveur Distant :</strong> Machine configurée pour intercepter la demande, analyser la requête et retourner instantanément les documents correspondants.</li>
+            <li><strong>L'Affichage :</strong> Le navigateur décode les scripts reçus en temps réel pour composer l'image finale.</li>
+          </ul>
+        </div>
+        <div class="code-image-side"><span style="color: #6a9955;"># Envoi de la demande réseau</span>
+GET /index.html HTTP/1.1
+Host: tetedecitron.github.io
+User-Agent: Mozilla/5.0
+
+<span style="color: #6a9955;"># Réponse de la machine distante</span>
+HTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 1452</div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-layout">
+        <div>
+          <div class="slide-tag">Partie 2 — Les Métiers</div>
+          <h2>Développement & Architecture</h2>
+          <div class="grid-3">
+            <div class="card">
+              <div class="card-sub">Interface</div>
+              <div class="card-title">Front-End</div>
+              <div class="card-desc">Conçoit l'ergonomie visuelle et adapte l'affichage sur ordinateurs, tablettes et smartphones.</div>
+            </div>
+            <div class="card">
+              <div class="card-sub">Données</div>
+              <div class="card-title">Back-End</div>
+              <div class="card-desc">Administre l'infrastructure invisible : sécurité, calculs complexes et gestion des utilisateurs.</div>
+            </div>
+            <div class="card">
+              <div class="card-sub">Suivi</div>
+              <div class="card-title">Webmaster</div>
+              <div class="card-desc">Garant du cycle de vie du site. Coordonne le contenu, corrige les incidents et optimise le référencement.</div>
+            </div>
+          </div>
+        </div>
+        <div class="code-image-side"><span style="color: #569cd6;">const</span> <span style="color: #4fc1ff;">app</span> = <span style="color: #dcdcaa;">require</span>(<span style="color: #ce9178;">'express'</span>)();
+<span style="color: #569cd6;">const</span> <span style="color: #4fc1ff;">db</span> = <span style="color: #dcdcaa;">connectDatabase</span>();
+
+<span style="color: #4fc1ff;">app</span>.<span style="color: #dcdcaa;">get</span>(<span style="color: #ce9178;">'/api/data'</span>, (<span style="color: #9cdcfe;">req</span>, <span style="color: #9cdcfe;">res</span>) =&gt; {
+  <span style="color: #569cd6;">let</span> <span style="color: #9cdcfe;">user</span> = <span style="color: #4fc1ff;">db</span>.<span style="color: #dcdcaa;">authenticate</span>(<span style="color: #9cdcfe;">req</span>);
+  <span style="color: #9cdcfe;">res</span>.<span style="color: #dcdcaa;">json</span>({ <span style="color: #9cdcfe;">status</span>: <span style="color: #ce9178;">"Access Granted"</span> });
+});</div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-layout">
+        <div>
+          <div class="slide-tag">Partie 2 — Compétences</div>
+          <h2>Profil et exigences requises</h2>
+          <ul>
+            <li><strong>Rigueur syntaxique :</strong> Une simple virgule manquante ou une balise mal fermée peut rompre l'ensemble de la mise en page.</li>
+            <li><strong>Analyse logique :</strong> Être capable de retracer l'origine d'un bug système à travers la console.</li>
+            <li><strong>Travail collaboratif :</strong> Interagir quotidiennement avec des graphistes, chefs de projets et clients.</li>
+            <li><strong>Veille technologique :</strong> Suivre le rythme d'évolution des technologies et des nouveaux standards de sécurité.</li>
+          </ul>
+        </div>
+        <div class="code-image-side" style="color: #d4d4d4;"><span style="color: #dcdcaa;">[Console Log — Erreur détectée]</span>
+<span style="color: #f44747;">Uncaught SyntaxError: Unexpected token '}'
+  at main.js:24:12</span>
+<span style="color: #6a9955;">&gt; Analyse du fichier source en cours...
+&gt; Résolution : ligne corrigée avec succès.</span></div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-full">
+        <div class="slide-tag">Partie 3 — Orientation</div>
+        <h2>Les parcours dès le Lycée</h2>
+        <div class="grid-3" style="margin-top: 1rem;">
+          <div class="card" style="border-top: 4px solid var(--accent); padding: 1.5rem;">
+            <div class="card-sub">Filière Générale</div>
+            <div class="card-title" style="font-size: 1.3rem; margin-bottom: 8px;">Spécialité NSI</div>
+            <div class="card-desc" style="font-size: 13px;">Numérique et Sciences Informatiques. Découverte théorique des algorithmes, de la gestion des données et de la programmation structurée.</div>
+          </div>
+          <div class="card" style="border-top: 4px solid var(--accent); padding: 1.5rem;">
+            <div class="card-sub">Filière Techno</div>
+            <div class="card-title" style="font-size: 1.3rem; margin-bottom: 8px;">Bac STI2D</div>
+            <div class="card-desc" style="font-size: 13px;">Sciences et Technologies de l'Industrie. Travail par projet centré sur l'innovation numérique et les solutions technologiques durables.</div>
+          </div>
+          <div class="card" style="border-top: 4px solid var(--accent); padding: 1.5rem;">
+            <div class="card-sub">Filière Pro</div>
+            <div class="card-title" style="font-size: 1.3rem; margin-bottom: 8px;">Bac Pro CIEL</div>
+            <div class="card-desc" style="font-size: 13px;">Cybersécurité, Informatique et réseaux, Électronique. Un cursus concret basé sur le déploiement matériel et les infrastructures réseaux.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-full">
+        <div class="slide-tag">Partie 3 — Supérieur</div>
+        <h2>L'enseignement supérieur</h2>
+        <ul style="max-width: 850px;">
+          <li><strong>Formations technologiques (Bac+2 / Bac+3) :</strong> Le BTS SIO (Services Informatiques aux Organisations) ou le BUT Informatique offrent des spécialisations rapides en développement ou administration des réseaux, orientées vers l'insertion professionnelle.</li>
+          <li><strong>Cursus universitaires :</strong> Les Licences puis les Masters d'informatique permettent de se spécialiser dans des domaines de pointe comme le génie logiciel ou l'ingénierie du web.</li>
+          <li><strong>Écoles d'ingénieurs :</strong> Cycles longs et sélectifs formant aux fonctions de management de projet numérique, d'architecture des systèmes et d'analyse complexe.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-full">
+        <div class="slide-tag">Conclusion</div>
+        <h2>Bilan</h2>
+        <ul style="max-width: 850px;">
+          <li><strong>Compréhension technique globale :</strong> Ces recherches m'ont permis de cartographier précisément l'ensemble des mechanisms logiques invisibles qui structurent nos usages internet au quotidien.</li>
+          <li><strong>Un secteur d'activité clé :</strong> Le domaine des technologies web s'impose comme un environnement particulièrement dynamique, aujourd'hui tiré par les besoins en cybersécurité et l'intelligence artificielle.</li>
+          <li><strong>Validation de mes perspectives :</strong> Cette exploration approfondie confirme mon intérêt pour les disciplines informatiques, validant mon choix d'orientation vers les métiers associant logique et développement.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-center-text">
+        <div class="slide-tag">Projet Personnel</div>
+        <h2>Mise en pratique concrète</h2>
+        <p>Afin de concrétiser mes recherches théoriques, j'ai développé un exemple d'application réelle :</p>
+        
+        <div class="project-container" style="max-width: 700px; margin: 1.5rem auto 0 auto; width: 100%;">
+          <a href="https://tetedecitron.github.io/LGM" target="_blank" class="project-btn">
+            Lien vers projet de site La Grande Métairie
+          </a>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-  <!-- INTRO -->
-  <div class="section">
-    <div class="section-header">
-      <span class="section-num">Introduction</span>
-      <div class="section-line"></div>
-    </div>
-    <p class="intro-text">
-      Comprendre comment fonctionne un site web, c'est entrer dans les coulisses du numérique — un secteur qui évolue très vite et qui offre de nombreux métiers comme <strong style="color:#c0bdb7;font-weight:500;">programmeur, développeur web</strong> ou <strong style="color:#c0bdb7;font-weight:500;">webmaster</strong>.
-    </p>
-    <div class="divider"></div>
-    <p style="font-size:13px;color:var(--dim);">Plan de la présentation</p>
-    <div class="flow" style="margin-top:0.75rem;">
-      <span class="flow-step">1. Fonctionnement</span>
-      <span class="flow-arrow">&#8594;</span>
-      <span class="flow-step">2. Les métiers</span>
-      <span class="flow-arrow">&#8594;</span>
-      <span class="flow-step">3. Les études</span>
-      <span class="flow-arrow">&#8594;</span>
-      <span class="flow-step">4. Conclusion</span>
-    </div>
+  <div class="controls">
+    <button class="btn" id="prevBtn" disabled>Précédent</button>
+    <div class="counter" id="slideCounter">1 / 10</div>
+    <button class="btn" id="nextBtn">Suivant</button>
   </div>
 
-  <!-- PARTIE 1 -->
-  <div class="section">
-    <div class="section-header">
-      <span class="section-num">Partie 1</span>
-      <div class="section-line"></div>
-    </div>
-    <h2>Comment fonctionne un site web</h2>
-    <p>Un site web repose sur trois éléments principaux qui fonctionnent ensemble pour afficher une page dans votre navigateur.</p>
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const slideCounter = document.getElementById('slideCounter');
+    let currentSlide = 0;
 
-    <div class="tech-grid">
-      <div class="tech-card">
-        <div class="role">Structure</div>
-        <div class="lang">HTML</div>
-        <div class="desc">L'ossature de la page, comme les murs d'une maison.</div>
-      </div>
-      <div class="tech-card">
-        <div class="role">Apparence</div>
-        <div class="lang">CSS</div>
-        <div class="desc">Les couleurs, la mise en page, les polices.</div>
-      </div>
-      <div class="tech-card">
-        <div class="role">Interactions</div>
-        <div class="lang">JS</div>
-        <div class="desc">Les animations, boutons, menus dynamiques.</div>
-      </div>
-    </div>
+    function updateSlides() {
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+      });
+      prevBtn.disabled = currentSlide === 0;
+      nextBtn.disabled = currentSlide === slides.length - 1;
+      slideCounter.textContent = `${currentSlide + 1} / ${slides.length}`;
+    }
 
-    <p>Quand on tape une adresse dans un navigateur, celui-ci envoie une demande à un serveur, qui renvoie les fichiers du site. Le navigateur les lit, assemble le HTML, applique le CSS, exécute le JavaScript — et affiche la page.</p>
+    prevBtn.addEventListener('click', () => {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlides();
+      }
+    });
 
-    <div class="flow">
-      <span class="flow-step">Navigateur</span>
-      <span class="flow-arrow">&#8594;</span>
-      <span class="flow-step">Requête serveur</span>
-      <span class="flow-arrow">&#8594;</span>
-      <span class="flow-step">Fichiers reçus</span>
-      <span class="flow-arrow">&#8594;</span>
-      <span class="flow-step">Page affichée</span>
-    </div>
-  </div>
+    nextBtn.addEventListener('click', () => {
+      if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        updateSlides();
+      }
+    });
 
-  <!-- PARTIE 2 -->
-  <div class="section">
-    <div class="section-header">
-      <span class="section-num">Partie 2</span>
-      <div class="section-line"></div>
-    </div>
-    <h2>Les métiers du web</h2>
-
-    <p>Le domaine du web m'attire parce qu'il combine créativité, logique et technologie. On peut créer quelque chose à partir de rien, résoudre des problèmes, et voir immédiatement le résultat.</p>
-
-    <div class="sub-label">Les métiers possibles</div>
-    <div class="job-grid">
-      <div class="job-card">
-        <div class="j-title">Développeur web</div>
-        <div class="j-desc">Écrit le code, crée les fonctionnalités, assure le bon fonctionnement.</div>
-      </div>
-      <div class="job-card">
-        <div class="j-title">Webmaster</div>
-        <div class="j-desc">Gère un site au quotidien, met à jour les pages, corrige les bugs.</div>
-      </div>
-      <div class="job-card">
-        <div class="j-title">Développeur front-end</div>
-        <div class="j-desc">S'occupe de la partie visible, ce que l'utilisateur voit.</div>
-      </div>
-      <div class="job-card">
-        <div class="j-title">Développeur back-end</div>
-        <div class="j-desc">Gère la partie cachée : bases de données, serveurs.</div>
-      </div>
-      <div class="job-card">
-        <div class="j-title">Webdesigner</div>
-        <div class="j-desc">Crée l'apparence du site : couleurs, images, mise en page.</div>
-      </div>
-      <div class="job-card">
-        <div class="j-title">Admin système</div>
-        <div class="j-desc">S'occupe des serveurs et de l'hébergement du site.</div>
-      </div>
-    </div>
-
-    <div class="sub-label">Compétences nécessaires</div>
-    <div class="skill-list">
-      <div class="skill-item"><div class="skill-dot"></div>Savoir coder (HTML, CSS, JavaScript, Python, PHP…)</div>
-      <div class="skill-item"><div class="skill-dot"></div>Avoir de la logique pour résoudre des problèmes</div>
-      <div class="skill-item"><div class="skill-dot"></div>Être créatif pour imaginer des interfaces</div>
-      <div class="skill-item"><div class="skill-dot"></div>Savoir travailler en équipe — les projets se font rarement seul</div>
-      <div class="skill-item"><div class="skill-dot"></div>Être curieux, car les technologies évoluent très vite</div>
-    </div>
-  </div>
-
-  <!-- PARTIE 3 -->
-  <div class="section">
-    <div class="section-header">
-      <span class="section-num">Partie 3</span>
-      <div class="section-line"></div>
-    </div>
-    <h2>Études &amp; débouchés</h2>
-
-    <div class="sub-label">Après le collège</div>
-    <div class="etude-list">
-      <div class="etude-item"><span class="etude-badge badge-bac">Bac</span>Général avec spécialité NSI (Numérique et Sciences Informatiques)</div>
-      <div class="etude-item"><span class="etude-badge badge-bac">Bac</span>Technologique STI2D</div>
-      <div class="etude-item"><span class="etude-badge badge-bac">Bac</span>Professionnel SN (Systèmes Numériques)</div>
-    </div>
-
-    <div class="sub-label">Après le bac</div>
-    <div class="etude-list">
-      <div class="etude-item"><span class="etude-badge badge-sup">Sup</span>BUT Informatique</div>
-      <div class="etude-item"><span class="etude-badge badge-sup">Sup</span>BTS SIO (Services Informatiques aux Organisations)</div>
-      <div class="etude-item"><span class="etude-badge badge-sup">Sup</span>Écoles spécialisées en développement web</div>
-      <div class="etude-item"><span class="etude-badge badge-sup">Sup</span>Licence ou master en informatique</div>
-    </div>
-
-    <div class="divider"></div>
-    <p>Le numérique est un secteur qui recrute énormément. On peut travailler en entreprise, en freelance, ou même créer son propre site ou application. L'intelligence artificielle, la réalité virtuelle et la cybersécurité ouvrent encore plus de possibilités pour l'avenir.</p>
-  </div>
-
-  <!-- CONCLUSION -->
-  <div class="section">
-    <div class="section-header">
-      <span class="section-num">Conclusion</span>
-      <div class="section-line"></div>
-    </div>
-    <div class="conclusion">
-      <p>Comprendre comment fonctionne un site web permet de découvrir un univers beaucoup plus vaste : <strong>celui des métiers du numérique</strong>.</p>
-      <p>Ce thème m'a permis de mieux connaître les technologies du web, mais surtout <strong>d'explorer un parcours professionnel qui m'intéresse vraiment</strong>.</p>
-      <p>Les métiers du web sont variés, accessibles, et surtout <strong>tournés vers l'avenir</strong>. C'est un domaine où l'on peut créer, apprendre, et évoluer toute sa vie.</p>
-      <p>C'est pour cela que je m'y intéresse particulièrement dans mon <strong>Parcours Avenir</strong>.</p>
-    </div>
-  </div>
-
-  <div class="footer">Parcours Avenir &mdash; 3ème &mdash; Comment fonctionne un site web</div>
-
-</div>
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' && currentSlide < slides.length - 1) {
+        currentSlide++;
+        updateSlides();
+      } else if (e.key === 'ArrowLeft' && currentSlide > 0) {
+        currentSlide--;
+        updateSlides();
+      }
+    });
+  </script>
 </body>
 </html>
